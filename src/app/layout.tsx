@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className={`${plus_jakarta_sans.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
