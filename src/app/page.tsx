@@ -1,7 +1,9 @@
+import { Header } from "@/components/home/header";
+
 export default function HomePage() {
   return (
      <div>
-        <h1>Olá mundo!</h1>
+        <Header />
      </div>
   );
 }
