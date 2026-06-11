@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { NavLinks } from "./nav-links";
 
 export const Header = () => {
   return (
-    <header className="flex justify-between items-center p-3">
+    <header className="sticky top-0 flex shadow-xl justify-between items-center p-3">
       <div>
         <Link href="/" title="Link para página inicial">
           <Image
@@ -22,10 +23,13 @@ export const Header = () => {
       <div>
         <Sheet>
           <SheetTrigger>
-            <Menu size={56} className="" />
+            <Menu size={56} className="text-primary-500" />
           </SheetTrigger>
           <SheetContent className="bg-white">
-             
+            <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+            </SheetHeader>
+             <NavLinks />
           </SheetContent>
         </Sheet>
       </div>
