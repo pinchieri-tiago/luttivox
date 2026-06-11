@@ -9,6 +9,10 @@ const plus_jakarta_sans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "LuttiVox",
   description: "Aprender nunca foi tão simples",
+  robots: {
+     index: true,
+     follow: true
+  }
 };
 
 export default function RootLayout({
