@@ -40,7 +40,7 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
 
   return (
     <nav className="flex min-h-screen md:min-h-16 flex-col md:flex-row items-center">
-      <ul className="flex flex-col md:flex-row gap-4 p-4 text-2xl md:text-sm lg:text-xl">
+      <ul className="text-primary-900    flex flex-col md:flex-row gap-4 p-4 text-2xl md:text-sm lg:text-xl">
         <li>
           <Link
             href="/"
