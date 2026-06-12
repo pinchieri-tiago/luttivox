@@ -18,7 +18,7 @@ import { Auth } from "./auth";
 export const Header = () => {
   const [isOpenSheet, setIsOpenSheet] = useState(false);
   return (
-    <header className="sticky top-0 flex items-center justify-between p-3 shadow-xl">
+    <header className="  flex items-center justify-between p-3 shadow-xl">
       <div className="ml-4">
         <Link href="/" title="Link para página inicial">
           <Image
@@ -28,7 +28,7 @@ export const Header = () => {
             height={200}
             title="logotipo da aplicação"
             loading="eager"
-            className="md:w-25 lg:w-35 h-auto w-auto" 
+            className="h-auto w-auto md:w-25 lg:w-35"
           />
         </Link>
       </div>
@@ -42,9 +42,7 @@ export const Header = () => {
           <SheetContent className="bg-white">
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
-              <SheetDescription>
-                  Escolha um link abaixo
-              </SheetDescription>
+              <SheetDescription>Escolha um link abaixo</SheetDescription>
             </SheetHeader>
             <NavLinks setIsOpenSheet={setIsOpenSheet} />
             <div className="w-full">
