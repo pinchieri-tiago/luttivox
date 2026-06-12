@@ -5,12 +5,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface NavLinksProps {
-    setIsOpenSheet?: (open: boolean) => void
+  setIsOpenSheet?: (open: boolean) => void;
 }
 
-export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
+export const NavLinks = ({ setIsOpenSheet }: NavLinksProps) => {
   const [activeSection, setActiveSection] = useState<string>("");
-  
 
   useEffect(() => {
     // Detecta o hash atual na URL
@@ -28,26 +27,42 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    // Fecha o sheet primeiro na versão mobile
+    setIsOpenSheet?.(false);
+
+    // Atualiza o hash na URL
     if (sectionId === "home") {
-      window.scrollTo(0, 0);
+      window.history.pushState(null, "", "/");
+      // Usa setTimeout para permitir que o sheet feche antes de fazer scroll
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setActiveSection("home");
+      }, 200);
     } else {
-      const element = document.getElementById(sectionId);
-      element?.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `/#${sectionId}`);
+      setActiveSection(sectionId);
+
+      // Usa setTimeout para permitir que o sheet feche antes de fazer scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 200);
     }
   };
 
   const isActive = (section: string) => activeSection === section;
 
   return (
-    <nav className="flex md:min-h-16 flex-col md:flex-row items-center">
-      <ul className="text-primary-900 flex flex-col items-center md:flex-row gap-4 p-4 text-2xl md:text-xs lg:text-xl">
+    <nav className="flex flex-col items-center md:min-h-16 md:flex-row">
+      <ul className="text-primary-900 flex flex-col items-center gap-4 p-4 text-2xl md:flex-row md:text-xs lg:text-xl">
         <li>
           <Link
             href="/"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("home");
-              setIsOpenSheet?.(false);
             }}
             className={cn(isActive("home") && "font-black underline")}
           >
@@ -60,7 +75,6 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("beneficios");
-               setIsOpenSheet?.(false);
             }}
             className={cn(isActive("beneficios") && "font-black underline")}
           >
@@ -73,7 +87,6 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("sobre");
-               setIsOpenSheet?.(false);
             }}
             className={cn(isActive("sobre") && "font-black underline")}
           >
@@ -86,7 +99,6 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("demonstracao");
-               setIsOpenSheet?.(false);
             }}
             className={cn(isActive("demonstracao") && "font-black underline")}
           >
@@ -99,7 +111,6 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("planos");
-               setIsOpenSheet?.(false);
             }}
             className={cn(isActive("planos") && "font-black underline")}
           >
