@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const About = () => {
   return (
-    <section className="mt-7 lg:mt-12">
+    <section className="mt-7 lg:mt-12" id="sobre">
       <div className="flex flex-col items-center text-3xl">
         <h2 className="text-primary-700 font-bold">Como Funciona</h2>
         <p className="mt-3 max-w-65 text-center text-lg font-bold md:max-w-120">
