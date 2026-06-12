@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Noto_Sans, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Noto_Sans, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const playfairDisplayHeading = Playfair_Display({subsets:['latin'],variable:'--font-heading'});
 
 const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
+
+const inter = Inter({
+  subsets: ["latin"]
+});
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
   subsets: ["latin"]

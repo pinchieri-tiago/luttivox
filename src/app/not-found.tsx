@@ -15,7 +15,7 @@ export default function NotFound() {
               height={200}
               title="logotipo da aplicação"
               loading="eager"
-              className="md:w-25 lg:w-35"
+              className="md:w-25 lg:w-35 h-auto w-auto"
             />
           </Link>
         </div>
