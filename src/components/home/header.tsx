@@ -1,13 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { NavLinks } from "./nav-links";
+import { useState } from "react";
 
 export const Header = () => {
+  const [isOpenSheet, setIsOpenSheet] = useState(false);
   return (
-    <header className="sticky top-0 flex shadow-xl justify-between items-center p-3">
-      <div>
+    <header className="sticky top-0 flex items-center justify-between p-3 shadow-xl ">
+      <div className="ml-4">
         <Link href="/" title="Link para página inicial">
           <Image
             src="/logo.png"
@@ -20,18 +30,23 @@ export const Header = () => {
       </div>
 
       {/* mobile */}
-      <div>
-        <Sheet>
+      <div className="md:hidden">
+        <Sheet open={isOpenSheet} onOpenChange={setIsOpenSheet}>
           <SheetTrigger>
             <Menu size={56} className="text-primary-500" />
           </SheetTrigger>
           <SheetContent className="bg-white">
             <SheetHeader>
-                <SheetTitle>Menu</SheetTitle>
+              <SheetTitle>Menu</SheetTitle>
             </SheetHeader>
-             <NavLinks />
+            <NavLinks setIsOpenSheet={setIsOpenSheet} />
           </SheetContent>
         </Sheet>
+      </div>
+
+      {/* tablet desktop */}
+      <div className="hidden md:flex">
+        <NavLinks />
       </div>
     </header>
   );

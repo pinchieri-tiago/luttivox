@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface NavLinksProps {
-    setIsOpenSheet?: (open: boolean) => {} 
+    setIsOpenSheet?: (open: boolean) => void
 }
 
 export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
@@ -39,8 +39,8 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
   const isActive = (section: string) => activeSection === section;
 
   return (
-    <nav className="flex min-h-screen flex-col items-center">
-      <ul className="flex flex-col gap-4 p-4 text-2xl">
+    <nav className="flex min-h-screen md:min-h-16 flex-col md:flex-row items-center">
+      <ul className="flex flex-col md:flex-row gap-4 p-4 text-2xl md:text-sm lg:text-xl">
         <li>
           <Link
             href="/"
