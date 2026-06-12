@@ -25,6 +25,7 @@ export const Header = () => {
             width={200}
             height={200}
             title="logotipo da aplicação"
+            loading="eager"
           />
         </Link>
       </div>
