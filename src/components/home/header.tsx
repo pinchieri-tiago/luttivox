@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -41,6 +42,9 @@ export const Header = () => {
           <SheetContent className="bg-white">
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>
+                  Escolha um link abaixo
+              </SheetDescription>
             </SheetHeader>
             <NavLinks setIsOpenSheet={setIsOpenSheet} />
             <div className="w-full">
