@@ -33,6 +33,7 @@ export const Hero = () => {
           height={300}
           alt="Robô"
           className="w-full md:w-177 lg:w-267"
+          loading="eager"
         />
       </div>
     </section>
