@@ -39,8 +39,8 @@ export const NavLinks = ({setIsOpenSheet}: NavLinksProps) => {
   const isActive = (section: string) => activeSection === section;
 
   return (
-    <nav className="flex min-h-screen md:min-h-16 flex-col md:flex-row items-center">
-      <ul className="text-primary-900    flex flex-col md:flex-row gap-4 p-4 text-2xl md:text-sm lg:text-xl">
+    <nav className="flex md:min-h-16 flex-col md:flex-row items-center">
+      <ul className="text-primary-900 flex flex-col md:flex-row gap-4 p-4 text-2xl md:text-xs lg:text-xl">
         <li>
           <Link
             href="/"
