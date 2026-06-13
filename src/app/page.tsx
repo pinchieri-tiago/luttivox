@@ -8,14 +8,14 @@ import { Plans } from "@/components/home/Plans";
 
 export default function HomePage() {
   return (
-     <div>
-        <Header />
-        <Hero />
-        <Benefits />
-        <About />
-        <Demo  />
-        <Plans />
-        <Footer />
-     </div>
+    <div>
+      <Header />
+      <Hero />
+      <Benefits />
+      <About />
+      <Demo />
+      <Plans />
+      <Footer />
+    </div>
   );
 }
