@@ -11,7 +11,6 @@ Aprenda qualquer assunto com o poder da Inteligência Artificial — um tutor in
 ## Como Funciona
 
 - Defina seu objetivo de estudo.
-- Receba um plano de estudos inteligente e cronogramas personalizados.
 - Converse com o tutor de IA para receber explicações e resumos.
 
 ## Recursos
