@@ -1,27 +1,37 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Noto_Sans, Playfair_Display, Inter } from "next/font/google";
+import {
+  Plus_Jakarta_Sans,
+  Noto_Sans,
+  Playfair_Display,
+  Inter,
+} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
+import { SessionProvider } from "next-auth/react";
 
-const playfairDisplayHeading = Playfair_Display({subsets:['latin'],variable:'--font-heading'});
+const playfairDisplayHeading = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
-const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
+const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
 const inter = Inter({
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "LuttiVox",
   description: "Aprender nunca foi tão simples",
   robots: {
-     index: true,
-     follow: true
-  }
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -32,9 +42,21 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={cn("h-full", "antialiased", plus_jakarta_sans.className, "font-sans", notoSans.variable, playfairDisplayHeading.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        plus_jakarta_sans.className,
+        "font-sans",
+        notoSans.variable,
+        playfairDisplayHeading.variable,
+      )}
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
+        <SessionProvider>
+          <Toaster />
+          {children}
+        </SessionProvider>
+      </body>
     </html>
   );
 }

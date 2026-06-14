@@ -7,6 +7,10 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { loginWithCredentials } from "@/app/(auth)/login/action";
+import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
   email: emailSchema,
@@ -14,6 +18,7 @@ const loginSchema = z.object({
 });
 
 export const Login = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -23,7 +28,14 @@ export const Login = () => {
   });
 
   const submit = async (data: z.infer<typeof loginSchema>) => {
-     
+    const response = await loginWithCredentials(data);
+    if (response?.error) {
+      toast.error(response.message);
+      return;
+    }
+    
+    toast.success(response.message || "Login realizado com sucesso!");
+    router.push("/dashboard");
   };
   return (
     <div className="w-full">
@@ -99,7 +111,7 @@ export const Login = () => {
           <div className="my-5">
             <button
               disabled={form.formState.isSubmitting}
-              className="from-primary-700 cursor-pointer hover:from-secondary-600 hover:to-primary-700 to-secondary-600 flex w-full justify-center rounded-xl bg-linear-to-r px-4 py-2 text-center text-lg font-bold text-white transition-all duration-500 disabled:opacity-40 md:text-lg"
+              className="from-primary-700 hover:from-secondary-600 hover:to-primary-700 to-secondary-600 flex w-full cursor-pointer justify-center rounded-xl bg-linear-to-r px-4 py-2 text-center text-lg font-bold text-white transition-all duration-500 disabled:opacity-40 md:text-lg"
             >
               {form.formState.isSubmitting ? (
                 <div className="size-8 animate-spin rounded-full border-4 border-white border-t-transparent" />
