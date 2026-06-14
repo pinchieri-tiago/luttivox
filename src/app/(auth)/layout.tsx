@@ -1,11 +1,15 @@
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default async function Layout({ children }: LayoutProps) {
+  const session = await auth();
+  if (session?.user?.id) redirect("/dashboard");
   return (
     <div className="bg-secondary-50 flex min-h-screen flex-col items-center justify-center">
       <div className="my-4 flex min-w-76 flex-col items-center gap-4 rounded-4xl bg-white p-5 md:min-w-2xl md:flex-row md:justify-center lg:min-w-4xl">

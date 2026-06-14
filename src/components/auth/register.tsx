@@ -7,12 +7,13 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
-import { loginWithCredentials } from "@/app/(auth)/login/action";
+
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
 import { passwordMatchConfirmPasswordSchema } from "@/validation/password-match-confirmPassword-schema";
 import { nameSchema } from "@/validation/name-schema";
+import { register } from "@/app/(auth)/registrar/action";
 
 const registerSchema = z
   .object({
@@ -35,7 +36,13 @@ export const Register = () => {
   });
 
   const submit = async (data: z.infer<typeof registerSchema>) => {
-     
+    const response = await register(data);
+    if (!response?.error) {
+      toast.error(response?.message);
+      return;
+    }
+    toast.success(response.message || "Registro realizado com sucesso!");
+    router.push("/dashboard");
   };
   return (
     <div className="w-full">
