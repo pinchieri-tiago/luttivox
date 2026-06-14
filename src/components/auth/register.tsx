@@ -9,33 +9,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { loginWithCredentials } from "@/app/(auth)/login/action";
 import { toast } from "sonner";
- 
+
 import { useRouter } from "next/navigation";
+import { passwordMatchConfirmPasswordSchema } from "@/validation/password-match-confirmPassword-schema";
+import { nameSchema } from "@/validation/name-schema";
 
-const loginSchema = z.object({
-  email: emailSchema,
-  password: passwordSchema,
-});
+const registerSchema = z
+  .object({
+    name: nameSchema,
+    email: emailSchema,
+    password: passwordSchema,
+  })
+  .and(passwordMatchConfirmPasswordSchema);
 
-export const Login = () => {
+export const Register = () => {
   const router = useRouter();
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const submit = async (data: z.infer<typeof loginSchema>) => {
-    const response = await loginWithCredentials(data);
-    if (response?.error) {
-      toast.error(response.message);
-      return;
-    }
-    
-    toast.success(response?.message || "Login realizado com sucesso!");
-    router.push("/dashboard");
+  const submit = async (data: z.infer<typeof registerSchema>) => {
+     
   };
   return (
     <div className="w-full">
@@ -53,10 +53,36 @@ export const Login = () => {
             />
           </Link>
         </div>
-        <h2 className="font-bold">Entre com suas crêdenciais</h2>
+        <h2 className="font-bold">
+          Entre com suas crêdenciais para se registrar
+        </h2>
       </div>
       <form className="w-full" onSubmit={form.handleSubmit(submit)}>
         <fieldset className="flex flex-col gap-3.5">
+          <div className="w-full">
+            <Controller
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <div>
+                  <label htmlFor="name" className="text-primary-700 font-bold">
+                    Nome
+                  </label>
+                  <input
+                    {...field}
+                    type="text"
+                    placeholder="Digite seu nome"
+                    className="bg-secondary-50 text-primary-700 placeholder:text-primay-300 w-full rounded-3xl p-3 placeholder:font-bold"
+                  />
+                </div>
+              )}
+            />
+            {form.formState.errors?.name && (
+              <p className="mb-3 text-red-500">
+                {form.formState.errors?.name?.message}
+              </p>
+            )}
+          </div>
           <div className="w-full">
             <Controller
               name="email"
@@ -108,6 +134,33 @@ export const Login = () => {
               </p>
             )}
           </div>
+          <div className="w-full">
+            <Controller
+              name="confirmPassword"
+              control={form.control}
+              render={({ field }) => (
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="text-primary-700 font-bold"
+                  >
+                    Confirmar Senha
+                  </label>
+                  <input
+                    {...field}
+                    type="password"
+                    placeholder="*************"
+                    className="bg-secondary-50 text-primary-700 placeholder:text-primay-300 w-full rounded-3xl p-3 placeholder:font-bold"
+                  />
+                </div>
+              )}
+            />
+            {form.formState.errors?.confirmPassword && (
+              <p className="mb-3 text-red-500">
+                {form.formState.errors?.confirmPassword?.message}
+              </p>
+            )}
+          </div>
           <div className="my-5">
             <button
               disabled={form.formState.isSubmitting}
@@ -116,16 +169,16 @@ export const Login = () => {
               {form.formState.isSubmitting ? (
                 <div className="size-8 animate-spin rounded-full border-4 border-white border-t-transparent" />
               ) : (
-                "Entrar"
+                "Registrar"
               )}
             </button>
           </div>
         </fieldset>
       </form>
       <div className="mb-4 font-bold">
-        Não tem conta?{" "}
-        <Link href="/registrar" className="text-primary-500 underline">
-          Registre-se
+        Já tem conta?{" "}
+        <Link href="/login" className="text-primary-500 underline">
+          Faça login
         </Link>
       </div>
     </div>
