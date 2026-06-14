@@ -1,7 +1,11 @@
+"use client";
+
+
+
 export const Login = () => {
-    return (
-        <form>
-            
-        </form>
-    );
+  return <form>
+       <div>
+          
+       </div>
+  </form>;
 };
