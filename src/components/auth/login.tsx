@@ -34,7 +34,7 @@ export const Login = () => {
       return;
     }
     
-    toast.success(response.message || "Login realizado com sucesso!");
+    toast.success(response?.message || "Login realizado com sucesso!");
     router.push("/dashboard");
   };
   return (
